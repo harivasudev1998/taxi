@@ -21,6 +21,20 @@ export default function taxiLikeChangeAndActionReceived(state = null, action) {
                 console.log(alltaxi);
                 return alltaxi
 
+            case 'TAXI_DISLIKE_CHANGE':
+                    console.log("Taxi Dislike needs to be changed in store: " 
+                                                + JSON.stringify(action.payload));
+                    
+                    alltaxi.map( taxi => {
+                        if(taxi.id === action.payload.id){
+                            console.log("OLD Value of Dislikes in " + taxi.name + " is " + taxi.dislikes  );
+                            taxi.dislikes = action.payload.dislikes - 1
+                            console.log("NEW Value of Dislikes in " + taxi.name + " is " + taxi.dislikes  );
+                        }
+                    })
+                    console.log(alltaxi);
+                    return alltaxi
+    
             default:
                 break;
         }

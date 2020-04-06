@@ -9,7 +9,7 @@ class TaxiContainer extends React.Component {
     renderTaxiNames = function(){
         console.log(this.props.taxinames);
         return this.props.taxinames.map( taxi => {
-            console.log(taxi);
+            console.log( taxi);
             // console.log("harry" +taxi.dislikes)
             // console.log("harry" +taxi.likes)
 

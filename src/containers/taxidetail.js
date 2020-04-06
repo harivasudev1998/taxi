@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import taxiLikeChangeButtonClickedAndDispatched from '../actions/taxiLikeChangeButtonClickedAction';
 import taxiDislikeChangeButtonClickedAndDispatched from '../actions/taxiDislikeChangeButtonClickedAction';
 
@@ -43,12 +43,16 @@ class TaxiDetailContainer extends React.Component {
         this.props.changeLikes(this.state.taxiDetail)
     }
 
-    decreaseLikes = function () {
-        //decrease the value of dislikes by 1 in the taxiDetail state
-        console.log("Changing dislikes in taxiDetail!");
-        this.setState(taxiDetail => (this.state.taxiDetail.dislikes = this.state.taxiDetail.dislikes - 1, taxiDetail))
-        console.log(this.state.taxiDetail);
-        //pass the taxiDetail state as a parameter to this.props.changeDislikes
+    // decreaseLikes = function () {
+    //     //decrease the value of dislikes by 1 in the taxiDetail state
+    //     console.log("Changing dislikes in taxiDetail!");
+    //     this.setState(taxiDetail => (this.state.taxiDetail.dislikes = this.state.taxiDetail.dislikes - 1, taxiDetail))
+    //     console.log(this.state.taxiDetail);
+    //     //pass the taxiDetail state as a parameter to this.props.changeDislikes
+    //     this.props.changeDislikes(this.state.taxiDetail)
+    // }
+    decreaseLikes=function(){
+        this.setState(taxiDetail=>(this.state.taxiDetail.dislikes=this.state.taxiDetail.dislikes-1,taxiDetail))
         this.props.changeDislikes(this.state.taxiDetail)
     }
 
@@ -92,11 +96,22 @@ function convertTaxiStoreToPropsForDetail(store) {
     }
 }
 
+// function mapFunctionPropsToActionAndDispatch(dispatch) {
+//     return bindActionCreators({
+//         changeLikes: taxiLikeChangeButtonClickedAndDispatched,
+//         changeDislikes:taxiDislikeChangeButtonClickedAndDispatched
+        
+        
+        
+//     }, dispatch)
+// }
 function mapFunctionPropsToActionAndDispatch(dispatch) {
-    return bindActionCreators({
-        changeLikes: taxiLikeChangeButtonClickedAndDispatched,
-        changeDislikes:taxiDislikeChangeButtonClickedAndDispatched
-    }, dispatch)
+    return {
+        changeLikes:bindActionCreators(taxiLikeChangeButtonClickedAndDispatched,dispatch),
+        changeDislikes:bindActionCreators(taxiDislikeChangeButtonClickedAndDispatched,dispatch)   
+    }
 }
+
+
 
 export default connect(convertTaxiStoreToPropsForDetail, mapFunctionPropsToActionAndDispatch)(TaxiDetailContainer);
